@@ -15,19 +15,18 @@ describe('AddThreadUseCase', () => {
 
     const mockAddedThread = new AddedThread({
       title: 'sebuah thread',
-      body: 'sebuah body thread',
-      owner: 'user-123',
+      body: useCasePayload.body,
     });
 
     const mockThreadRepository = new ThreadRepository();
 
     mockThreadRepository.addNewThread = jest
       .fn()
-      .mockImplementation(() => Promise.resolve(mockAddedThread));
+      .mockImplementation(() => Promise.resolve(useCaseCredential, mockAddedThread));
 
     const getThreadUseCase = new AddThreadUseCase({ threadRepository: mockThreadRepository });
 
-    const addedThread = await getThreadUseCase.exceute(useCasePayload, useCaseCredential);
+    const addedThread = await getThreadUseCase.execute(useCaseCredential, useCasePayload);
 
     expect(addedThread).toStrictEqual(
       new AddThreadUseCase({

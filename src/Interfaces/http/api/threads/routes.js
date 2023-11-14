@@ -8,8 +8,8 @@ const routes = (handler) => ([
     },
   },
   {
-    method: 'POST',
-    path: '/threads',
+    method: 'GET',
+    path: '/threads/{threadId}',
     handler: handler.getThreadDetailHendler,
     options: {
       auth: 'forum_jwt',

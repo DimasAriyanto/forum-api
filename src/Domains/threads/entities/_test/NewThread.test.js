@@ -14,19 +14,17 @@ describe('a NewThread entities', () => {
     const payload = {
       id: 123,
       title: 'sebuah thread',
-      body: 'sebuah body thread',
+      owner: 'user-123',
     };
 
-    expect(() => new NewThread(payload)).toThrowError(
-      'NEW_THREAD.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED',
-    );
+    expect(() => new NewThread(payload)).toThrowError('NEW_THREAD.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED');
   });
 
   it('should create addedThread object correctly', () => {
     const payload = {
-      id: 'thread-h_2FkLZhtgBKY2kh4CC02',
+      id: 'thread-h_W1Plfpj0TY7wyT2PUPX',
       title: 'sebuah thread',
-      body: 'sebuah body thread',
+      owner: 'user-123',
     };
 
     const addedThread = new NewThread(payload);
