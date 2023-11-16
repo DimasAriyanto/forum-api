@@ -9,13 +9,12 @@ class AddedThread {
   }
 
   _verifyPayload({ title, body }) {
-    console.log({ title, body });
     if (!title || !body) {
       throw new Error('ADDED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
     if (typeof title !== 'string' || typeof body !== 'string') {
-      throw new Error('ADDED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+      throw new Error('ADDED_THREAD.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
     }
   }
 }

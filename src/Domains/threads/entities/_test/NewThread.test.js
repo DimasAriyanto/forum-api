@@ -3,7 +3,7 @@ const NewThread = require('../NewThread');
 describe('a NewThread entities', () => {
   it('should throw error when payload did not contain right property', () => {
     const payload = {
-      id: 'thread-h_2FkLZhtgBKY2kh4CC02',
+      id: 'thread-123',
       title: 'sebuah thread',
     };
 
@@ -22,7 +22,7 @@ describe('a NewThread entities', () => {
 
   it('should create addedThread object correctly', () => {
     const payload = {
-      id: 'thread-h_W1Plfpj0TY7wyT2PUPX',
+      id: 'thread-123',
       title: 'sebuah thread',
       owner: 'user-123',
     };

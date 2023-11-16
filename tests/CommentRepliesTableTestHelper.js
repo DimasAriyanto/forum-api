@@ -4,7 +4,7 @@ const CommentRepliesTableTestHelper = {
   async addCommentReply({
     id = 'comment-replies-123',
     content = 'Sipp',
-    createdAt = new Date(),
+    date = new Date(),
     userId = 'users-123',
     threadId = 'threads-123',
     commentId = 'comments-123',
@@ -12,7 +12,7 @@ const CommentRepliesTableTestHelper = {
   }) {
     const query = {
       text: 'INSERT INTO comment_replies VALUES($1, $2, $3, $4, $5, $6, $7)',
-      values: [id, content, createdAt, userId, threadId, commentId, isDeleted],
+      values: [id, content, date, userId, threadId, commentId, isDeleted],
     };
 
     await pool.query(query);

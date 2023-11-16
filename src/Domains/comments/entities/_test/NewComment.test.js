@@ -3,7 +3,7 @@ const NewComment = require('../NewComment');
 describe('a NewComment entities', () => {
   it('should throw error when payload did not contain right property', () => {
     const payload = {
-      id: 'comment-_pby2_tmXV6bcvcdev8xk',
+      id: 'comment-123',
       content: 'sebuah comment',
     };
 
@@ -22,7 +22,7 @@ describe('a NewComment entities', () => {
 
   it('should create addedThread object correctly', () => {
     const payload = {
-      id: 'comment-_pby2_tmXV6bcvcdev8xk',
+      id: 'comment-123',
       content: 'sebuah comment',
       owner: 'user-123',
     };

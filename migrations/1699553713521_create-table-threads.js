@@ -16,10 +16,10 @@ exports.up = (pgm) => {
       type: 'TEXT',
       notNull: true,
     },
-    createdAt: {
+    date: {
       type: 'timestamp',
       notNull: true,
-      // default: pgm.func('current_timestamp'),
+      default: pgm.func('current_timestamp'),
     },
     user_id: {
       type: 'VARCHAR(50)',

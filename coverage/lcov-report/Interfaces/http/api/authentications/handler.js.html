@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.68% </span>
+                <span class="strong">42.1% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/19</span>
+                <span class='fraction'>8/19</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.68% </span>
+                <span class="strong">42.1% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/19</span>
+                <span class='fraction'>8/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -113,22 +113,22 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -141,9 +141,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,18 +154,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const LoginUserUseCase = require('../../../../Applications/use_case/LoginUserUseCase');
-const RefreshAuthenticationUseCase = require('../../../../Applications/use_case/RefreshAuthenticationUseCase');
-const LogoutUserUseCase = require('../../../../Applications/use_case/LogoutUserUseCase');
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const LoginUserUseCase = require('../../../../Applications/use_case/users/LoginUserUseCase');
+const RefreshAuthenticationUseCase = require('../../../../Applications/use_case/authentications/RefreshAuthenticationUseCase');
+const LogoutUserUseCase = require('../../../../Applications/use_case/users/LogoutUserUseCase');
 &nbsp;
 class AuthenticationsHandler {
   constructor(container) {
@@ -176,9 +176,9 @@ class AuthenticationsHandler {
     this.deleteAuthenticationHandler = this.deleteAuthenticationHandler.bind(this);
   }
 &nbsp;
-  async postAuthenticationHandler(request, h) {
-    const loginUserUseCase = this._container.getInstance(LoginUserUseCase.name);
-    const { accessToken, refreshToken } = await loginUserUseCase.execute(request.payload);
+<span class="fstat-no" title="function not covered" >  as</span>ync postAuthenticationHandler(request, h) {
+    const loginUserUseCase = <span class="cstat-no" title="statement not covered" >this._container.getInstance(LoginUserUseCase.name);</span>
+    const { accessToken, refreshToken } = <span class="cstat-no" title="statement not covered" >await loginUserUseCase.execute(request.payload);</span>
     const response = <span class="cstat-no" title="statement not covered" >h.response({</span>
       status: 'success',
       data: {
@@ -190,10 +190,10 @@ class AuthenticationsHandler {
 <span class="cstat-no" title="statement not covered" >    return response;</span>
   }
 &nbsp;
-  async putAuthenticationHandler(request) {
-    const refreshAuthenticationUseCase = this._container
+<span class="fstat-no" title="function not covered" >  as</span>ync putAuthenticationHandler(request) {
+    const refreshAuthenticationUseCase = <span class="cstat-no" title="statement not covered" >this._container</span>
       .getInstance(RefreshAuthenticationUseCase.name);
-    const accessToken = await refreshAuthenticationUseCase.execute(request.payload);
+    const accessToken = <span class="cstat-no" title="statement not covered" >await refreshAuthenticationUseCase.execute(request.payload);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return {</span>
       status: 'success',
@@ -203,9 +203,9 @@ class AuthenticationsHandler {
     };
   }
 &nbsp;
-  async deleteAuthenticationHandler(request) {
-    const logoutUserUseCase = this._container.getInstance(LogoutUserUseCase.name);
-    await logoutUserUseCase.execute(request.payload);
+<span class="fstat-no" title="function not covered" >  as</span>ync deleteAuthenticationHandler(request) {
+    const logoutUserUseCase = <span class="cstat-no" title="statement not covered" >this._container.getInstance(LogoutUserUseCase.name);</span>
+<span class="cstat-no" title="statement not covered" >    await logoutUserUseCase.execute(request.payload);</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
       status: 'success',
     };
@@ -220,7 +220,7 @@ module.exports = AuthenticationsHandler;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-11T01:30:25.877Z
+                at 2023-11-15T18:25:19.594Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

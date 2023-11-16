@@ -1,4 +1,4 @@
-class ThreadDetail {
+class CommentDetail {
   constructor(payload) {
     this._verifyPayload(payload);
 
@@ -7,13 +7,15 @@ class ThreadDetail {
     } = payload;
 
     this.id = id;
-    this.username = username;
-    this.date = date;
     this.content = content;
+    this.date = date;
+    this.username = username;
     this.replies = replies;
   }
 
-  _verifyPayload(id, username, date, content, replies) {
+  _verifyPayload({
+    id, username, date, content, replies,
+  }) {
     if (!id || !username || !date || !content || !replies) {
       throw new Error('THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
     }
@@ -30,4 +32,4 @@ class ThreadDetail {
   }
 }
 
-module.exports = ThreadDetail;
+module.exports = CommentDetail;

@@ -1,17 +1,17 @@
 class CommentRepository {
-  async verifyAvailableUser(userId) {
+  async addNewComment(threadId, userId, comment) {
     throw new Error('COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async verifyAvailableThread(threadId) {
+  async deleteComment(userId, threadId, commentId) {
     throw new Error('COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async addNewThread(threadId, userId, comment) {
+  async getCommentById(threadId) {
     throw new Error('COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async deleteThreadById(commentId) {
+  async verifyAvailableComment(commentId) {
     throw new Error('COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 }
