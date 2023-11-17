@@ -3,7 +3,7 @@ class CommentReplyDetail {
     this._verifyPayload(payload);
 
     const {
-      id, content, date, username, replies,
+      id, content, date, username,
     } = payload;
 
     this.id = id;

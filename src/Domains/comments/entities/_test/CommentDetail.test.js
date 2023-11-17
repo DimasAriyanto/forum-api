@@ -6,12 +6,9 @@ describe('a CommentDetail entities', () => {
       username: 'dicoding',
       date: '2000-10-05',
       content: 'sebuah comment',
-      replies: [],
     };
 
-    expect(() => new CommentDetail(payload)).toThrowError(
-      'THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY',
-    );
+    expect(() => new CommentDetail(payload)).toThrowError('THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
   });
 
   it('should throw error when payload property did not meet data type needed', () => {
@@ -20,12 +17,9 @@ describe('a CommentDetail entities', () => {
       username: 'dicoding',
       date: '2000-10-05',
       content: 'sebuah comment',
-      replies: [],
     };
 
-    expect(() => new CommentDetail(payload)).toThrowError(
-      'THREAD_DETAIL.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED',
-    );
+    expect(() => new CommentDetail(payload)).toThrowError('THREAD_DETAIL.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
   });
 
   it('should create CommentDetail object correctly', () => {
@@ -34,7 +28,6 @@ describe('a CommentDetail entities', () => {
       username: 'dicoding',
       date: '2000-10-05',
       content: 'sebuah comment',
-      replies: [],
     };
 
     const commentDetail = new CommentDetail(payload);
@@ -43,6 +36,5 @@ describe('a CommentDetail entities', () => {
     expect(commentDetail.username).toEqual(payload.username);
     expect(commentDetail.date).toEqual(payload.date);
     expect(commentDetail.content).toEqual(payload.content);
-    expect(commentDetail.replies).toEqual(payload.replies);
   });
 });

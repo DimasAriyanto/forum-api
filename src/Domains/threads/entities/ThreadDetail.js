@@ -3,21 +3,20 @@ class ThreadDetail {
     this._verifyPayload(payload);
 
     const {
-      id, title, body, date, username, comments,
+      id, title, body, date, username,
     } = payload;
 
     this.id = id;
     this.title = title;
     this.body = body;
-    this.date = date;
+    this.date = new Date(date);
     this.username = username;
-    this.comments = comments;
   }
 
   _verifyPayload({
-    id, title, body, date, username, comments,
+    id, title, body, date, username,
   }) {
-    if (!id || !title || !body || !date || !username || !comments) {
+    if (!id || !title || !body || !date || !username) {
       throw new Error('THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
@@ -25,9 +24,8 @@ class ThreadDetail {
       typeof id !== 'string'
       || typeof title !== 'string'
       || typeof body !== 'string'
-      || typeof date !== 'string'
+      || !(date instanceof Date)
       || typeof username !== 'string'
-      || !Array.isArray(comments)
     ) {
       throw new Error('THREAD_DETAIL.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
     }

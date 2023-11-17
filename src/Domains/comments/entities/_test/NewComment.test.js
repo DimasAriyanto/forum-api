@@ -17,7 +17,7 @@ describe('a NewComment entities', () => {
       owner: 'user-123',
     };
 
-    expect(() => new NewComment(payload)).toThrowError('NEW_COMMENT.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED');
+    expect(() => new NewComment(payload)).toThrowError('NEW_COMMENT.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
   });
 
   it('should create addedThread object correctly', () => {

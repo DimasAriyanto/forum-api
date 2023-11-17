@@ -17,7 +17,7 @@ describe('a NewThread entities', () => {
       owner: 'user-123',
     };
 
-    expect(() => new NewThread(payload)).toThrowError('NEW_THREAD.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED');
+    expect(() => new NewThread(payload)).toThrowError('NEW_THREAD.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
   });
 
   it('should create addedThread object correctly', () => {

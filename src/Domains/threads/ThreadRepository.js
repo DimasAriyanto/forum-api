@@ -1,5 +1,5 @@
 class ThreadRepository {
-  async addNewThread(id, thread) {
+  async addNewThread(userId, thread) {
     throw new Error('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 

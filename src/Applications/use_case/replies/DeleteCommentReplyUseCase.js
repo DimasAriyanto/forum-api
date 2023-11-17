@@ -1,5 +1,7 @@
 class DeleteCommentReplyUseCase {
-  constructor({ userRepository, threadRepository, commentRepository, commentReplyRepository }) {
+  constructor({
+    userRepository, threadRepository, commentRepository, commentReplyRepository,
+  }) {
     this._userRepository = userRepository;
     this._threadRepository = threadRepository;
     this._commentRepository = commentRepository;
@@ -12,7 +14,7 @@ class DeleteCommentReplyUseCase {
     await this._commentRepository.verifyAvailableComment(commentId);
     await this._commentReplyRepository.verifyAvailableReply(replyId);
 
-    return this._commentReplyRepository.deleteCommentReply(replyId, userId, threadId, commentId);
+    return this._commentReplyRepository.deleteCommentReply(replyId);
   }
 }
 

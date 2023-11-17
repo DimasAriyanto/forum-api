@@ -7,7 +7,7 @@ const ThreadsTableTestHelper = {
     title = 'sebuah thread',
     body = 'sebuah body thread',
     date = new Date(),
-    userId = 'users-123',
+    userId = 'user-123',
   }) {
     const query = {
       text: 'INSERT INTO threads VALUES($1, $2, $3, $4, $5)',

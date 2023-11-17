@@ -1,7 +1,3 @@
-const CommentReplyDetail = require('../../../Domains/replies/entities/CommentReplyDetail');
-const CommentDetail = require('../../../Domains/comments/entities/CommentDetail');
-const ThreadDetail = require('../../../Domains/threads/entities/ThreadDetail');
-
 class GetDetailThreadUseCase {
   constructor({
     threadRepository, commentRepository, commentReplyRepository, userRepository,
@@ -13,57 +9,26 @@ class GetDetailThreadUseCase {
   }
 
   async execute(threadId) {
-    const dataThread = await this._threadRepository.getThreadById(threadId);
-    const dataThreadUsername = await this._userRepository.getUsernameById(dataThread.user_id);
+    const thread = await this._threadRepository.getThreadById(threadId);
+    let comments = await this._commentRepository.getCommentById(threadId);
+    const replies = await this._commentReplyRepository.getCommentReplyById(threadId);
 
-    const thread = new ThreadDetail({
-      id: dataThread.id,
-      title: dataThread.title,
-      body: dataThread.body,
-      date: dataThread.date.toString(),
-      username: dataThreadUsername,
-      comments: [],
-    });
+    comments = comments.map((comment) => ({
+      id: comment.id,
+      username: comment.username,
+      date: comment.date,
+      content: comment.content,
+      replies: replies
+        .filter((reply) => reply.comment_id === comment.id)
+        .map((reply) => ({
+          id: reply.id,
+          content: reply.content,
+          date: reply.date,
+          username: reply.username,
+        })),
+    }));
 
-    const commentsInThread = await this._commentRepository.getCommentById(thread.id);
-
-    if (commentsInThread.length > 0) {
-      thread.comments = await Promise.all(
-        commentsInThread.map(async (comment) => {
-          const commentUsername = await this._userRepository.getUsernameById(comment.user_id);
-          const commentDetail = new CommentDetail({
-            id: comment.id,
-            username: commentUsername,
-            date: comment.date.toString(),
-            replies: [],
-            content: comment.content,
-          });
-
-          const replyInThread = await this._commentReplyRepository.getCommentReplyById(
-            commentDetail.id,
-          );
-
-          if (replyInThread.length > 0) {
-            commentDetail.replies = await Promise.all(
-              replyInThread.map(async (reply) => {
-                const replyUsername = await this._userRepository.getUsernameById(reply.user_id);
-                const replyDetail = new CommentReplyDetail({
-                  id: reply.id,
-                  content: reply.content,
-                  date: reply.date.toString(),
-                  username: replyUsername,
-                });
-
-                return replyDetail;
-              }),
-            );
-          }
-
-          return commentDetail;
-        }),
-      );
-    }
-    return thread;
+    return { ...thread, comments };
   }
 }
 

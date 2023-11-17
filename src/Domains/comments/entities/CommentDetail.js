@@ -3,20 +3,19 @@ class CommentDetail {
     this._verifyPayload(payload);
 
     const {
-      id, content, date, username, replies,
+      id, content, date, username,
     } = payload;
 
     this.id = id;
     this.content = content;
     this.date = date;
     this.username = username;
-    this.replies = replies;
   }
 
   _verifyPayload({
-    id, username, date, content, replies,
+    id, username, date, content,
   }) {
-    if (!id || !username || !date || !content || !replies) {
+    if (!id || !username || !date || !content) {
       throw new Error('THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
@@ -25,7 +24,6 @@ class CommentDetail {
       || typeof username !== 'string'
       || typeof date !== 'string'
       || typeof content !== 'string'
-      || !Array.isArray(replies)
     ) {
       throw new Error('THREAD_DETAIL.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
     }

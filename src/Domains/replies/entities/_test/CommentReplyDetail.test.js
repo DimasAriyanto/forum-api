@@ -19,7 +19,7 @@ describe('a CommentReplyDetail entities', () => {
       content: 'sebuah balasan',
     };
 
-    expect(() => new CommentReplyDetail(payload)).toThrowError('COMMENT_REPLY_DETAIL.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED');
+    expect(() => new CommentReplyDetail(payload)).toThrowError('COMMENT_REPLY_DETAIL.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
   });
 
   it('should create CommentReplyDetail object correctly', () => {

@@ -1,96 +1,79 @@
 const CommentRepository = require('../../../../Domains/comments/CommentRepository');
 const CommentReplyRepository = require('../../../../Domains/replies/CommentReplyRepository');
 const ThreadRepository = require('../../../../Domains/threads/ThreadRepository');
-const ThreadDetail = require('../../../../Domains/threads/entities/ThreadDetail');
-const UserRepository = require('../../../../Domains/users/UserRepository');
 const GetDetailThreadUseCase = require('../GetThreadDetailUseCase');
 
 describe('GetDetailThreadUseCase', () => {
   it('should orchestrating get the detail thread', async () => {
-    const user = {
-      id: 'user-123',
-      username: 'dicoding',
+    const useCasePayload = {
+      threadId: 'thread-123',
     };
 
-    const mockThreadData = {
+    const mockThread = {
       id: 'thread-123',
       title: 'sebuah thread',
       body: 'sebuah body thread',
-      date: '2000-05-10',
-      user_id: 'user-123',
+      date: '2021-08-08T07:19:09.775Z',
+      username: 'dicoding',
     };
 
-    const commentData = [
+    const mockComment = [
       {
         id: 'comment-123',
-        content: 'sebuah comment pertama',
-        date: '2000-05-10',
         username: 'dicoding',
-        user_id: 'user-123',
-        thread_id: 'thread-123',
-      },
-      {
-        id: 'comment-234',
-        content: 'sebuah comment kedua',
-        date: '2000-05-10',
-        username: 'dicoding',
-        user_id: 'user-123',
-        thread_id: 'thread-123',
+        date: '2021-08-08T07:22:33.555Z',
+        content: 'sebuah comment',
       },
     ];
 
-    const replyData = [
+    const mockReply = [
       {
         id: 'reply-123',
-        content: 'sebuah balasan pertama',
-        date: '2000-05-10',
-        user_id: 'user-123',
+        content: 'sebuah balasan',
+        date: '2021-08-08T08:07:01.522Z',
         comment_id: 'comment-123',
-      },
-      {
-        id: 'reply-234',
-        content: 'sebuah balasan kedua',
-        date: '2000-05-10',
         username: 'dicoding',
-        user_id: 'user-123',
-        comment_id: 'comment-123',
       },
     ];
 
-    const mockCommentReplyRepository = new CommentReplyRepository();
-    const mockCommentRepository = new CommentRepository();
+    const mappedComments = mockComment.map(({ ...otherProperties }) => otherProperties);
+    const mappedReplies = mockReply.map(({ comment_id, ...otherProperties }) => otherProperties);
+
+    const commentReplies = [
+      {
+        ...mappedComments[0],
+        replies: mappedReplies,
+      },
+    ];
+
     const mockThreadRepository = new ThreadRepository();
-    const mockUserRepository = new UserRepository();
+    const mockCommentRepository = new CommentRepository();
+    const mockCommentReplyRepository = new CommentReplyRepository();
 
     mockThreadRepository.getThreadById = jest
       .fn()
-      .mockImplementation(() => Promise.resolve(mockThreadData));
-    mockUserRepository.getUsernameById = jest.fn().mockImplementation();
+      .mockImplementation(() => Promise.resolve(mockThread));
     mockCommentRepository.getCommentById = jest
       .fn()
-      .mockImplementation(() => Promise.resolve(commentData));
-    mockCommentReplyRepository.getCommentReplyById = jest.fn().mockImplementation();
+      .mockImplementation(() => Promise.resolve(mockComment));
+    mockCommentReplyRepository.getCommentReplyById = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve(mockReply));
 
-    const getDetailTHreadUseCase = new GetDetailThreadUseCase({
-      threadRepository: mockThreadData,
+    const mockGetThreadDetailUseCase = new GetDetailThreadUseCase({
+      threadRepository: mockThreadRepository,
       commentRepository: mockCommentRepository,
       commentReplyRepository: mockCommentReplyRepository,
-      userRepository: mockUserRepository,
     });
 
-    const threadDetail = await getDetailTHreadUseCase.execute(mockThreadData.id);
+    const datailThread = await mockGetThreadDetailUseCase.execute(useCasePayload.threadId);
 
-    expect(mockThreadRepository.getThreadById).toBeCalledWith(
-      new ThreadDetail({
-        id: mockThreadData.id,
-        title: mockThreadData.title,
-        body: mockThreadData.body,
-        date: mockThreadData.date.toString(),
-        username: user.username,
-        comments: [],
-      }),
-    );
-    expect(mockUserRepository.getUsernameById).toBeCalledWith(user.username);
-    expect(threadDetail.comments).toHaveLength(commentData.length);
+    expect(datailThread).toStrictEqual({
+      ...mockThread,
+      comments: commentReplies,
+    });
+    expect(mockThreadRepository.getThreadById).toBeCalledWith(useCasePayload.threadId);
+    expect(mockCommentRepository.getCommentById).toBeCalledWith(useCasePayload.threadId);
+    expect(mockCommentReplyRepository.getCommentReplyById).toBeCalledWith(useCasePayload.threadId);
   });
 });

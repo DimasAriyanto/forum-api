@@ -5,9 +5,8 @@ describe('a ThreadDetail entities', () => {
     const payload = {
       title: 'sebuah thread',
       body: 'sebuah body thread',
-      date: '2000-10-05',
+      date: new Date('2000-10-05'),
       username: 'dicoding',
-      comments: [],
     };
 
     expect(() => new ThreadDetail(payload)).toThrowError('THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -18,12 +17,11 @@ describe('a ThreadDetail entities', () => {
       id: 123,
       title: 'sebuah thread',
       body: 'sebuah body thread',
-      date: '2000-10-05',
+      date: new Date('2000-10-05'),
       username: 'dicoding',
-      comments: [],
     };
 
-    expect(() => new ThreadDetail(payload)).toThrowError('THREAD_DETAIL.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED');
+    expect(() => new ThreadDetail(payload)).toThrowError('THREAD_DETAIL.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
   });
 
   it('should create ThreadDetail object correctly', () => {
@@ -31,9 +29,8 @@ describe('a ThreadDetail entities', () => {
       id: 'thread-123',
       title: 'sebuah thread',
       body: 'sebuah body thread',
-      date: '2000-10-05',
+      date: new Date('2000-10-05'),
       username: 'dicoding',
-      comments: [],
     };
 
     const threadDetail = new ThreadDetail(payload);
@@ -43,6 +40,5 @@ describe('a ThreadDetail entities', () => {
     expect(threadDetail.body).toEqual(payload.body);
     expect(threadDetail.date).toEqual(payload.date);
     expect(threadDetail.username).toEqual(payload.username);
-    expect(threadDetail.comments).toEqual(payload.comments);
   });
 });

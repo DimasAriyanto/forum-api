@@ -15,7 +15,7 @@ describe('a AddedThread entities', () => {
       body: 'sebuah body thread',
     };
 
-    expect(() => new AddedThread(payload)).toThrowError('ADDED_THREAD.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED');
+    expect(() => new AddedThread(payload)).toThrowError('ADDED_THREAD.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
   });
 
   it('should create addedThread object correctly', () => {

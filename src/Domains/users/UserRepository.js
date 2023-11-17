@@ -18,10 +18,6 @@ class UserRepository {
   async verifyAvailableUser(userId) {
     throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
-
-  async getUsernameById(userId) {
-    throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-  }
 }
 
 module.exports = UserRepository;

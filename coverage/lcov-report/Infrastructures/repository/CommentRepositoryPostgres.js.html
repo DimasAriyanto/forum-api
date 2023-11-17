@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">17.85% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/28</span>
+                <span class='fraction'>6/30</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">17.85% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/28</span>
+                <span class='fraction'>6/30</span>
             </div>
         
             
@@ -138,10 +138,20 @@
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -176,28 +186,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,12 +209,32 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const CommentRepository = require('../../Domains/comments/CommentRepository');
+const CommentDetail = require('../../Domains/comments/entities/CommentDetail');
 const NewComment = require('../../Domains/comments/entities/NewComment');
 &nbsp;
 class CommentRepositoryPostgres extends CommentRepository {
@@ -247,13 +266,19 @@ class CommentRepositoryPostgres extends CommentRepository {
 &nbsp;
 <span class="fstat-no" title="function not covered" >  as</span>ync getCommentById(threadId) {
     const query = <span class="cstat-no" title="statement not covered" >{</span>
-      text: 'SELECT * FROM comments WHERE thread_id = $1',
+      text: `SELECT comments.id, comments.content, comments.date, users.username
+             FROM comments
+             INNER JOIN users
+             ON comments.user_id = users.id
+             WHERE comments.thread_id = $1
+             ORDER BY comments.date ASC`,
       values: [threadId],
     };
 &nbsp;
-    const result = <span class="cstat-no" title="statement not covered" >await this._pool.query(query);</span>
+    const { rows } = <span class="cstat-no" title="statement not covered" >await this._pool.query(query);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return result.rows;</span>
+    // return new CommentDetail({ ...rows });
+<span class="cstat-no" title="statement not covered" >    return rows;</span>
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  as</span>ync verifyAvailableComment(commentId) {
@@ -271,12 +296,12 @@ class CommentRepositoryPostgres extends CommentRepository {
 <span class="cstat-no" title="statement not covered" >    return result.rows[0].id;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  as</span>ync deleteComment(userId, threadId, commentId) {
+<span class="fstat-no" title="function not covered" >  as</span>ync deleteComment(commentId) {
     const deletedContent = <span class="cstat-no" title="statement not covered" >'**komentar telah dihapus**';</span>
 &nbsp;
     const query = <span class="cstat-no" title="statement not covered" >{</span>
-      text: 'UPDATE comments SET content = $1, is_deleted = true WHERE id = $2  AND thread_id = $3 AND user_id = $4 RETURNING id',
-      values: [deletedContent, commentId, threadId, userId],
+      text: 'UPDATE comments SET content = $1, is_deleted = true WHERE id = $2 RETURNING id',
+      values: [deletedContent, commentId],
     };
 &nbsp;
     const result = <span class="cstat-no" title="statement not covered" >await this._pool.query(query);</span>
@@ -284,6 +309,8 @@ class CommentRepositoryPostgres extends CommentRepository {
 <span class="cstat-no" title="statement not covered" >    if (!result.rowCount) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AuthorizationError('gagal menghapus content');</span>
     }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return result.rowCount;</span>
   }
 }
 &nbsp;
@@ -295,7 +322,7 @@ module.exports = CommentRepositoryPostgres;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-15T17:58:21.919Z
+                at 2023-11-17T07:48:27.102Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

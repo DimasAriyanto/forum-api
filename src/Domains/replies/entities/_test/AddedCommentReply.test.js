@@ -12,7 +12,7 @@ describe('a AddedCommentReply entities', () => {
       content: 123,
     };
 
-    expect(() => new AddedCommentReply(payload)).toThrowError('ADDED_COMMENT_REPLY.PROPERTY_NOT_MEET_DATA_TYPE_NEEDED');
+    expect(() => new AddedCommentReply(payload)).toThrowError('ADDED_COMMENT_REPLY.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
   });
 
   it('should create addedCoAddedCommentReply object correctly', () => {

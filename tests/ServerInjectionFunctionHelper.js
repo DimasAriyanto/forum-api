@@ -1,55 +1,29 @@
 const ServerInjectionFunctionHelper = {
-  async injection(server, options) {
-    return server.inject(options);
-  },
+  async getAccessTokenAndUserIdHelper({ server, username = 'dicoding' }) {
+    const userPayload = {
+      username:
+        Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5),
+      password: 'secret',
+    };
 
-  addUserOpotion(payload) {
-    return {
+    const responseUser = await server.inject({
       method: 'POST',
       url: '/users',
-      payload,
-    };
-  },
-
-  addAuthOption(payload) {
-    return {
-      method: 'POST',
-      url: 'authentication',
-      payload,
-    };
-  },
-
-  addThreadOption(payload, auth) {
-    return {
-      method: 'POST',
-      url: 'thread',
-      payload,
-      headers: {
-        Authorization: `Bearer ${auth}`,
+      payload: {
+        ...userPayload,
+        fullname: 'placeholder fullname',
       },
-    };
-  },
+    });
 
-  addCommentOption(payload, threadId, auth) {
-    return {
+    const responseAuth = await server.inject({
       method: 'POST',
-      url: `threads/${threadId}/comments`,
-      payload,
-      headers: {
-        Authorization: `Bearer ${auth}`,
-      },
-    };
-  },
+      url: '/authentications',
+      payload: userPayload,
+    });
 
-  addCommentReplayOption(payload, threadId, commentId, auth) {
-    return {
-      method: 'POST',
-      url: `threads/${threadId}/comments/${commentId}/replies`,
-      payload,
-      headers: {
-        Authorization: `Bearer ${auth}`,
-      },
-    };
+    const { id: userId } = JSON.parse(responseUser.payload).data.addedUser;
+    const { accessToken } = JSON.parse(responseAuth.payload).data;
+    return { userId, accessToken };
   },
 };
 

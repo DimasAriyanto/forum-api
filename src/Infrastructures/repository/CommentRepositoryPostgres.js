@@ -1,6 +1,7 @@
 const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const CommentRepository = require('../../Domains/comments/CommentRepository');
+const CommentDetail = require('../../Domains/comments/entities/CommentDetail');
 const NewComment = require('../../Domains/comments/entities/NewComment');
 
 class CommentRepositoryPostgres extends CommentRepository {
@@ -32,13 +33,19 @@ class CommentRepositoryPostgres extends CommentRepository {
 
   async getCommentById(threadId) {
     const query = {
-      text: 'SELECT * FROM comments WHERE thread_id = $1',
+      text: `SELECT comments.id, comments.content, comments.date, users.username
+             FROM comments
+             INNER JOIN users
+             ON comments.user_id = users.id
+             WHERE comments.thread_id = $1
+             ORDER BY comments.date ASC`,
       values: [threadId],
     };
 
-    const result = await this._pool.query(query);
+    const { rows } = await this._pool.query(query);
 
-    return result.rows;
+    // return new CommentDetail({ ...rows });
+    return rows;
   }
 
   async verifyAvailableComment(commentId) {
@@ -56,12 +63,12 @@ class CommentRepositoryPostgres extends CommentRepository {
     return result.rows[0].id;
   }
 
-  async deleteComment(userId, threadId, commentId) {
+  async deleteComment(commentId) {
     const deletedContent = '**komentar telah dihapus**';
 
     const query = {
-      text: 'UPDATE comments SET content = $1, is_deleted = true WHERE id = $2  AND thread_id = $3 AND user_id = $4 RETURNING id',
-      values: [deletedContent, commentId, threadId, userId],
+      text: 'UPDATE comments SET content = $1, is_deleted = true WHERE id = $2 RETURNING id',
+      values: [deletedContent, commentId],
     };
 
     const result = await this._pool.query(query);
@@ -69,6 +76,8 @@ class CommentRepositoryPostgres extends CommentRepository {
     if (!result.rowCount) {
       throw new AuthorizationError('gagal menghapus content');
     }
+
+    return result.rowCount;
   }
 }
 

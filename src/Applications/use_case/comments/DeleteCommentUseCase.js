@@ -10,7 +10,7 @@ class DeleteCommentUseCase {
     await this._threadRepository.verifyAvailableThread(threadId);
     await this._commentRepository.verifyAvailableComment(commentId);
 
-    return this._commentRepository.deleteComment(userId, threadId, commentId);
+    return this._commentRepository.deleteComment(commentId);
   }
 }
 
