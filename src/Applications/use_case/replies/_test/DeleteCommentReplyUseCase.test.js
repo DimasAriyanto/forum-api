@@ -28,7 +28,7 @@ describe('deleteReplyUseCase', () => {
     mockCommentReplyRepository.validate = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
-    mockCommentReplyRepository.deleteReply = jest
+    mockCommentReplyRepository.delete = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
 
@@ -45,6 +45,6 @@ describe('deleteReplyUseCase', () => {
     expect(mockThreadRepository.validate).toBeCalledWith(useCasePayload.threadId);
     expect(mockCommentRepository.validate).toBeCalledWith(useCasePayload.commentId);
     expect(mockCommentReplyRepository.validate).toBeCalledWith(useCasePayload.replyId);
-    expect(mockCommentReplyRepository.deleteReply).toBeCalledWith(useCasePayload.replyId);
+    expect(mockCommentReplyRepository.delete).toBeCalledWith(useCasePayload);
   });
 });

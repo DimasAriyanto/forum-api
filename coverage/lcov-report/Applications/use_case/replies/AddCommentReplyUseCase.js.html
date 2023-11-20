@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>2/12</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>2/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,50 +87,50 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const AddedCommentReply = require('../../../Domains/replies/entities/AddedCommentReply');
 &nbsp;
 class AddCommentReplyUseCase {
-  constructor({
+<span class="fstat-no" title="function not covered" >  co</span>nstructor({
     threadRepository, commentRepository, userRepository, commentReplyRepository,
   }) {
-    this._threadRepository = threadRepository;
-    this._commentRepository = commentRepository;
-    this._userRepository = userRepository;
-    this._commentReplyRepository = commentReplyRepository;
+<span class="cstat-no" title="statement not covered" >    this._threadRepository = threadRepository;</span>
+<span class="cstat-no" title="statement not covered" >    this._commentRepository = commentRepository;</span>
+<span class="cstat-no" title="statement not covered" >    this._userRepository = userRepository;</span>
+<span class="cstat-no" title="statement not covered" >    this._commentReplyRepository = commentReplyRepository;</span>
   }
 &nbsp;
-  async execute(useCasePayload) {
-    const { owner, threadId, commentId } = useCasePayload;
-    await this._userRepository.verifyAvailableUser(owner);
-    await this._threadRepository.validate(threadId);
-    await this._commentRepository.verifyAvailableComment(commentId);
-    const reply = new AddedCommentReply(useCasePayload);
+<span class="fstat-no" title="function not covered" >  as</span>ync execute(useCasePayload) {
+    const { owner, threadId, commentId } = <span class="cstat-no" title="statement not covered" >useCasePayload;</span>
+<span class="cstat-no" title="statement not covered" >    await this._userRepository.verifyAvailableUser(owner);</span>
+<span class="cstat-no" title="statement not covered" >    await this._threadRepository.validate(threadId);</span>
+<span class="cstat-no" title="statement not covered" >    await this._commentRepository.validate(commentId);</span>
+    const reply = <span class="cstat-no" title="statement not covered" >new AddedCommentReply(useCasePayload);</span>
 &nbsp;
-    return this._commentReplyRepository.addNewCommentReply(reply);
+<span class="cstat-no" title="statement not covered" >    return this._commentReplyRepository.create(reply);</span>
   }
 }
 &nbsp;
@@ -142,7 +142,7 @@ module.exports = AddCommentReplyUseCase;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-19T18:38:36.266Z
+                at 2023-11-20T06:54:02.398Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -1,7 +1,5 @@
 class GetDetailThreadUseCase {
-  constructor({
-    threadRepository, commentRepository, commentReplyRepository, userRepository,
-  }) {
+  constructor({ threadRepository, commentRepository, commentReplyRepository, userRepository }) {
     this._threadRepository = threadRepository;
     this._commentRepository = commentRepository;
     this._commentReplyRepository = commentReplyRepository;
@@ -17,12 +15,12 @@ class GetDetailThreadUseCase {
       id: comment.id,
       username: comment.username,
       date: comment.date,
-      content: comment.content,
+      content: comment.is_deleted ? '**komentar telah dihapus**' : comment.content,
       replies: replies
         .filter((reply) => reply.comment_id === comment.id)
         .map((reply) => ({
           id: reply.id,
-          content: reply.content,
+          content: reply.is_deleted ? '**balasan telah dihapus**' : reply.content,
           date: reply.date,
           username: reply.username,
         })),

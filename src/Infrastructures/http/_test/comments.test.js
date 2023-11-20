@@ -1,67 +1,36 @@
-const AuthenticationsTableTestHelper = require('../../../../tests/AuthenticationsTableTestHelper');
 const CommentsTableTestHelper = require('../../../../tests/CommentsTableTestHelper');
+const ServerTestHelper = require('../../../../tests/ServerTestHelper');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const container = require('../../container');
 const pool = require('../../database/postgres/pool');
 const createServer = require('../createServer');
 
-describe('/threads endpoint', () => {
+describe('/comments endpoint', () => {
   afterAll(async () => {
     await pool.end();
   });
 
   afterEach(async () => {
-    await CommentsTableTestHelper.cleanTable();
-    await ThreadsTableTestHelper.cleanTable();
-    await AuthenticationsTableTestHelper.cleanTable();
     await UsersTableTestHelper.cleanTable();
+    await ThreadsTableTestHelper.cleanTable();
+    await CommentsTableTestHelper.cleanTable();
   });
 
   describe('when POST /threads/{threadId}/comments', () => {
     it('should response 401 when missing authentication', async () => {
       // Arrange
-      const requestPayload = {
-        title: 'sebuah comment',
-      };
+      await ServerTestHelper.getAccessToken();
+
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
+
       const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
+      const requestPayload = {
+        content: 'sebuah comment',
+      };
 
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
-
-      // action
-      const responseThread = await server.inject({
-        method: 'POST',
-        url: '/threads',
-        payload: {
-          title: 'sebuah thread',
-          body: 'sebuah body thread',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseThreadJson = JSON.parse(responseThread.payload);
-      const threadId = responseThreadJson.data.addedThread.id;
-
+      // Action
       const response = await server.inject({
         method: 'POST',
         url: `/threads/${threadId}/comments`,
@@ -76,52 +45,22 @@ describe('/threads endpoint', () => {
 
     it('should response 400 when bad payload', async () => {
       // Arrange
+      const accessToken = await ServerTestHelper.getAccessToken();
+
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
+
+      const server = await createServer(container);
       const requestPayload = {
         content: 123,
       };
-      const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
 
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
-
-      // action
-      const responseThread = await server.inject({
-        method: 'POST',
-        url: '/threads',
-        payload: {
-          title: 'sebuah thread',
-          body: 'sebuah body thread',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseThreadJson = JSON.parse(responseThread.payload);
-      const threadId = responseThreadJson.data.addedThread.id;
-
+      // Action
       const response = await server.inject({
         method: 'POST',
         url: `/threads/${threadId}/comments`,
         payload: requestPayload,
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
 
       // Assert
@@ -132,38 +71,22 @@ describe('/threads endpoint', () => {
 
     it('should response 404 when not found thread', async () => {
       // Arrange
+      const accessToken = await ServerTestHelper.getAccessToken();
+
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
+
+      const server = await createServer(container);
       const requestPayload = {
         content: 'sebuah comment',
       };
-      const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
 
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
-
+      // Action
       const response = await server.inject({
         method: 'POST',
         url: '/threads/xxx/comments',
         payload: requestPayload,
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
 
       // Assert
@@ -174,52 +97,22 @@ describe('/threads endpoint', () => {
 
     it('should response 201 and new comments', async () => {
       // Arrange
+      const accessToken = await ServerTestHelper.getAccessToken();
+
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
+
+      const server = await createServer(container);
       const requestPayload = {
         content: 'sebuah comment',
       };
-      const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
 
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
-
-      // action
-      const responseThread = await server.inject({
-        method: 'POST',
-        url: '/threads',
-        payload: {
-          title: 'sebuah thread',
-          body: 'sebuah body thread',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseThreadJson = JSON.parse(responseThread.payload);
-      const threadId = responseThreadJson.data.addedThread.id;
-
+      // Action
       const response = await server.inject({
         method: 'POST',
         url: `/threads/${threadId}/comments`,
         payload: requestPayload,
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
 
       // Assert
@@ -232,56 +125,18 @@ describe('/threads endpoint', () => {
 
   describe('when DELETE /threads/{threadId}/comments/{commentId}', () => {
     it('should response 401 when missing authentication', async () => {
+      // Arrange
+      await ServerTestHelper.getAccessToken();
+
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
+
+      const commentId = 'comment-123';
+      await CommentsTableTestHelper.addComment({ id: commentId, owner: 'user-123', threadId });
+
       const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
 
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
-
-      // action
-      const responseThread = await server.inject({
-        method: 'POST',
-        url: '/threads',
-        payload: {
-          title: 'sebuah thread',
-          body: 'sebuah body thread',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseThreadJson = JSON.parse(responseThread.payload);
-      const threadId = responseThreadJson.data.addedThread.id;
-
-      const responseComment = await server.inject({
-        method: 'POST',
-        url: `/threads/${threadId}/comments`,
-        payload: {
-          content: 'sebuah comment',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseCommentJson = JSON.parse(responseComment.payload);
-      const commentId = responseCommentJson.data.addedComment.id;
-
+      // Action
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}`,
@@ -294,48 +149,22 @@ describe('/threads endpoint', () => {
     });
 
     it('should response 404 when not found comment', async () => {
+      // Arrange
+      const accessToken = await ServerTestHelper.getAccessToken();
+
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
+
+      const commentId = 'comment-123';
+      await CommentsTableTestHelper.addComment({ id: commentId, owner: 'user-123', threadId });
+
       const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
 
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
-
-      // action
-      const responseThread = await server.inject({
-        method: 'POST',
-        url: '/threads',
-        payload: {
-          title: 'sebuah thread',
-          body: 'sebuah body thread',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseThreadJson = JSON.parse(responseThread.payload);
-      const threadId = responseThreadJson.data.addedThread.id;
-
+      // Action
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/xxx`,
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
       const responseJson = JSON.parse(response.payload);
 
@@ -345,60 +174,22 @@ describe('/threads endpoint', () => {
     });
 
     it('should response 200 and delete comment data', async () => {
+      // Arrange
+      const accessToken = await ServerTestHelper.getAccessToken();
+
+      const threadId = 'thread-123';
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
+
+      const commentId = 'comment-123';
+      await CommentsTableTestHelper.addComment({ id: commentId, owner: 'user-123', threadId });
+
       const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
 
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
-
-      // action
-      const responseThread = await server.inject({
-        method: 'POST',
-        url: '/threads',
-        payload: {
-          title: 'sebuah thread',
-          body: 'sebuah body thread',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseThreadJson = JSON.parse(responseThread.payload);
-      const threadId = responseThreadJson.data.addedThread.id;
-
-      const responseComment = await server.inject({
-        method: 'POST',
-        url: `/threads/${threadId}/comments`,
-        payload: {
-          content: 'sebuah comment',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseCommentJson = JSON.parse(responseComment.payload);
-      const commentId = responseCommentJson.data.addedComment.id;
-
+      // Action
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}`,
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
       const responseJson = JSON.parse(response.payload);
 

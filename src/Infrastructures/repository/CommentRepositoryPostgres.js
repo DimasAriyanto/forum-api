@@ -41,11 +41,7 @@ class CommentRepositoryPostgres extends CommentRepository {
       values: [threadId],
     };
 
-    const { rows, rowCount } = await this._pool.query(query);
-
-    if (!rowCount) {
-      throw new NotFoundError('Comment not found');
-    }
+    const { rows } = await this._pool.query(query);
 
     return rows;
   }
@@ -65,10 +61,11 @@ class CommentRepositoryPostgres extends CommentRepository {
     return result.rows[0].id;
   }
 
-  async delete(id) {
+  async delete(useCasePayload) {
+    const { commentId, owner } = useCasePayload;
     const query = {
-      text: 'UPDATE comments SET is_deleted = true WHERE id = $1 RETURNING id',
-      values: [id],
+      text: 'UPDATE comments SET is_deleted = true WHERE id = $1 AND user_id = $2 RETURNING id',
+      values: [commentId, owner],
     };
 
     const { rowCount } = await this._pool.query(query);

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">18.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>3/16</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">18.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>3/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,8 +106,8 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -116,78 +116,78 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const UserLogin = require('../../../Domains/users/entities/UserLogin');
 const NewAuthentication = require('../../../Domains/authentications/entities/NewAuth');
 &nbsp;
 class LoginUserUseCase {
-  constructor({
+<span class="fstat-no" title="function not covered" >  co</span>nstructor({
     userRepository,
     authenticationRepository,
     authenticationTokenManager,
     passwordHash,
   }) {
-    this._userRepository = userRepository;
-    this._authenticationRepository = authenticationRepository;
-    this._authenticationTokenManager = authenticationTokenManager;
-    this._passwordHash = passwordHash;
+<span class="cstat-no" title="statement not covered" >    this._userRepository = userRepository;</span>
+<span class="cstat-no" title="statement not covered" >    this._authenticationRepository = authenticationRepository;</span>
+<span class="cstat-no" title="statement not covered" >    this._authenticationTokenManager = authenticationTokenManager;</span>
+<span class="cstat-no" title="statement not covered" >    this._passwordHash = passwordHash;</span>
   }
 &nbsp;
-  async execute(useCasePayload) {
-    const { username, password } = new UserLogin(useCasePayload);
+<span class="fstat-no" title="function not covered" >  as</span>ync execute(useCasePayload) {
+    const { username, password } = <span class="cstat-no" title="statement not covered" >new UserLogin(useCasePayload);</span>
 &nbsp;
-    const encryptedPassword = await this._userRepository.getPasswordByUsername(username);
+    const encryptedPassword = <span class="cstat-no" title="statement not covered" >await this._userRepository.getPasswordByUsername(username);</span>
 &nbsp;
-    await this._passwordHash.comparePassword(password, encryptedPassword);
+<span class="cstat-no" title="statement not covered" >    await this._passwordHash.comparePassword(password, encryptedPassword);</span>
 &nbsp;
-    const id = await this._userRepository.getIdByUsername(username);
+    const id = <span class="cstat-no" title="statement not covered" >await this._userRepository.getIdByUsername(username);</span>
 &nbsp;
-    const accessToken = await this._authenticationTokenManager.createAccessToken({ username, id });
-    const refreshToken = await this._authenticationTokenManager.createRefreshToken({
+    const accessToken = <span class="cstat-no" title="statement not covered" >await this._authenticationTokenManager.createAccessToken({ username, id });</span>
+    const refreshToken = <span class="cstat-no" title="statement not covered" >await this._authenticationTokenManager.createRefreshToken({</span>
       username,
       id,
     });
 &nbsp;
-    const newAuthentication = new NewAuthentication({
+    const newAuthentication = <span class="cstat-no" title="statement not covered" >new NewAuthentication({</span>
       accessToken,
       refreshToken,
     });
 &nbsp;
-    await this._authenticationRepository.addToken(newAuthentication.refreshToken);
+<span class="cstat-no" title="statement not covered" >    await this._authenticationRepository.addToken(newAuthentication.refreshToken);</span>
 &nbsp;
-    return newAuthentication;
+<span class="cstat-no" title="statement not covered" >    return newAuthentication;</span>
   }
 }
 &nbsp;
@@ -199,7 +199,7 @@ module.exports = LoginUserUseCase;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-19T18:38:36.266Z
+                at 2023-11-20T06:54:02.398Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

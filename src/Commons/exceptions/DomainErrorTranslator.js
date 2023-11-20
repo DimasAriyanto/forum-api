@@ -23,6 +23,7 @@ DomainErrorTranslator._directories = {
   'ADDED_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY': new InvariantError('harus mengirimkan input'),
   'ADDED_COMMENT_REPLY.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED': new InvariantError('input harus string'),
   'ADDED_COMMENT_REPLY.NOT_CONTAIN_NEEDED_PROPERTY': new InvariantError('harus mengirimkan input'),
+  'ADDED_COMMENT.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED': new InvariantError('harus mengirimkan input'),
 };
 
 module.exports = DomainErrorTranslator;

@@ -64,7 +64,7 @@ describe('ThreadRepositoryPostgres', () => {
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
 
       // Action
-      await ThreadsTableTestHelper.addThread({ id: 'thread-123' });
+      await ThreadsTableTestHelper.addThread({ id: 'thread-123', owner: 'user-123' });
       const thread = await threadRepositoryPostgres.getById('thread-123');
 
       // Assert
@@ -94,7 +94,7 @@ describe('ThreadRepositoryPostgres', () => {
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
 
       // Action
-      await ThreadsTableTestHelper.addThread({ id: 'thread-123' });
+      await ThreadsTableTestHelper.addThread({ id: 'thread-123', owner: 'user-123' });
 
       // Assert
       return expect(threadRepositoryPostgres.validate('thread-123')).resolves.not.toThrowError(NotFoundError);

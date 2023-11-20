@@ -18,7 +18,7 @@ class DeleteReplyUseCase {
     await this._commentRepository.validate(commentId);
     await this._commentReplyRepository.validate(replyId);
 
-    return this._commentReplyRepository.deleteReply(replyId);
+    return this._commentReplyRepository.delete(useCasePayload);
   }
 }
 

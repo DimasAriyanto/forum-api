@@ -19,7 +19,7 @@ const ThreadsTableTestHelper = {
 
   async getThreadById(id) {
     const query = {
-      text: 'SELECT id, title, user_id as owner FROM threads WHERE id = $1',
+      text: 'SELECT * FROM threads WHERE id = $1',
       values: [id],
     };
 

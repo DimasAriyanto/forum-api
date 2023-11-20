@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.51% </span>
+                <span class="strong">17.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/27</span>
+                <span class='fraction'>5/28</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.51% </span>
+                <span class="strong">17.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/27</span>
+                <span class='fraction'>5/28</span>
             </div>
         
             
@@ -143,10 +143,11 @@
 <a name='L78'></a><a href='#L78'>78</a>
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -208,6 +209,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,7 +224,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const CommentReplyRepository = require('../../Domains/replies/CommentReplyRepository');
@@ -235,7 +237,7 @@ class CommentReplyRepositoryPostgres extends CommentReplyRepository {
 <span class="cstat-no" title="statement not covered" >    this._idGenerator = idGenerator;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  as</span>ync addNewCommentReply(reply) {
+<span class="fstat-no" title="function not covered" >  as</span>ync create(reply) {
     const {
       content, owner, threadId, commentId,
     } = <span class="cstat-no" title="statement not covered" >reply;</span>
@@ -257,9 +259,9 @@ class CommentReplyRepositoryPostgres extends CommentReplyRepository {
     });
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  as</span>ync getCommentReplyById(id) {
+<span class="fstat-no" title="function not covered" >  as</span>ync getByThreadId(id) {
     const query = <span class="cstat-no" title="statement not covered" >{</span>
-      text: `SELECT comment_replies.id, comment_replies.content, comment_replies.date, comment_replies.comment_id, users.username
+      text: `SELECT comment_replies.id, comment_replies.content, comment_replies.date, comment_replies.comment_id, comment_replies.is_deleted, users.username
             FROM comment_replies
             INNER JOIN users
             ON comment_replies.user_id = users.id
@@ -273,7 +275,7 @@ class CommentReplyRepositoryPostgres extends CommentReplyRepository {
 <span class="cstat-no" title="statement not covered" >    return rows;</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  as</span>ync verifyAvailableReply(id) {
+<span class="fstat-no" title="function not covered" >  as</span>ync validate(id) {
     const query = <span class="cstat-no" title="statement not covered" >{</span>
       text: 'SELECT id FROM comment_replies WHERE id = $1',
       values: [id],
@@ -286,10 +288,11 @@ class CommentReplyRepositoryPostgres extends CommentReplyRepository {
     }
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  as</span>ync deleteCommentReply(id) {
+<span class="fstat-no" title="function not covered" >  as</span>ync delete(useCasePayload) {
+    const { replyId, owner } = <span class="cstat-no" title="statement not covered" >useCasePayload;</span>
     const query = <span class="cstat-no" title="statement not covered" >{</span>
-      text: 'UPDATE comment_replies SET is_deleted = true WHERE id = $2 RETURNING id',
-      values: [id],
+      text: 'UPDATE comment_replies SET is_deleted = true WHERE id = $1 AND user_id = $2 RETURNING id',
+      values: [replyId, owner],
     };
 &nbsp;
     const { rowCount } = <span class="cstat-no" title="statement not covered" >await this._pool.query(query);</span>
@@ -310,7 +313,7 @@ module.exports = CommentReplyRepositoryPostgres;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-19T18:38:36.266Z
+                at 2023-11-20T06:54:02.398Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>1/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>1/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,43 +87,43 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">class UserLogin {
-  constructor(payload) {
-    this._verifyPayload(payload);
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(payload) {
+<span class="cstat-no" title="statement not covered" >    this._verifyPayload(payload);</span>
 &nbsp;
-    this.username = payload.username;
-    this.password = payload.password;
+<span class="cstat-no" title="statement not covered" >    this.username = payload.username;</span>
+<span class="cstat-no" title="statement not covered" >    this.password = payload.password;</span>
   }
 &nbsp;
-  _verifyPayload(payload) {
-    const { username, password } = payload;
+<span class="fstat-no" title="function not covered" >  _v</span>erifyPayload(payload) {
+    const { username, password } = <span class="cstat-no" title="statement not covered" >payload;</span>
 &nbsp;
-    if (!username || !password) {
-      throw new Error('USER_LOGIN.NOT_CONTAIN_NEEDED_PROPERTY');
+<span class="cstat-no" title="statement not covered" >    if (!username || !password) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('USER_LOGIN.NOT_CONTAIN_NEEDED_PROPERTY');</span>
     }
 &nbsp;
-    if (typeof username !== 'string' || typeof password !== 'string') {
-      throw new Error('USER_LOGIN.NOT_MEET_DATA_TYPE_SPECIFICATION');
+<span class="cstat-no" title="statement not covered" >    if (typeof username !== 'string' || typeof password !== 'string') {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('USER_LOGIN.NOT_MEET_DATA_TYPE_SPECIFICATION');</span>
     }
   }
 }
@@ -136,7 +136,7 @@ module.exports = UserLogin;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-19T18:38:36.266Z
+                at 2023-11-20T06:54:02.398Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

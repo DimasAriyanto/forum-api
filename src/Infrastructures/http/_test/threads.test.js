@@ -1,4 +1,4 @@
-const AuthenticationsTableTestHelper = require('../../../../tests/AuthenticationsTableTestHelper');
+const ServerTestHelper = require('../../../../tests/ServerTestHelper');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const container = require('../../container');
@@ -11,9 +11,8 @@ describe('/threads endpoint', () => {
   });
 
   afterEach(async () => {
-    await ThreadsTableTestHelper.cleanTable();
-    await AuthenticationsTableTestHelper.cleanTable();
     await UsersTableTestHelper.cleanTable();
+    await ThreadsTableTestHelper.cleanTable();
   });
 
   describe('when POST /threads', () => {
@@ -44,35 +43,14 @@ describe('/threads endpoint', () => {
         title: 'sebuah thread',
       };
       const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
-
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
+      const accessToken = await ServerTestHelper.getAccessToken();
 
       // action
       const response = await server.inject({
         method: 'POST',
         url: '/threads',
         payload: requestPayload,
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
 
       // Assert
@@ -88,35 +66,14 @@ describe('/threads endpoint', () => {
         body: 'sebuah body thread',
       };
       const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
-
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
+      const accessToken = await ServerTestHelper.getAccessToken();
 
       // action
       const response = await server.inject({
         method: 'POST',
         url: '/threads',
         payload: requestPayload,
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
 
       // Assert
@@ -129,46 +86,14 @@ describe('/threads endpoint', () => {
 
   describe('when GET /threads/{threadId}', () => {
     it('should response 200 and get thread data', async () => {
+      // Arrange
+      const threadId = 'thread-123';
+      await UsersTableTestHelper.addUser({ id: 'user-123' });
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
+
       const server = await createServer(container);
-      // add user
-      await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
-      });
 
-      // login user
-      const responseAuth = await server.inject({
-        method: 'POST',
-        url: '/authentications',
-        payload: {
-          username: 'dicoding',
-          password: 'secret',
-        },
-      });
-
-      const responseAuthJson = JSON.parse(responseAuth.payload);
-
-      console.log('test1 : ', responseAuthJson);
-
-      // action
-      const responseThread = await server.inject({
-        method: 'POST',
-        url: '/threads',
-        payload: {
-          title: 'sebuah thread',
-          body: 'sebuah body thread',
-        },
-        headers: { Authorization: `Bearer ${responseAuthJson.data.accessToken}` },
-      });
-
-      const responseThreadJson = JSON.parse(responseThread.payload);
-      const threadId = responseThreadJson.data.addedThread.id;
-
+      // Action
       const response = await server.inject({
         method: 'GET',
         url: `/threads/${threadId}`,

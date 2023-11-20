@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>1/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>1/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -96,61 +96,61 @@
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">class RegisterUser {
-  constructor(payload) {
-    this._verifyPayload(payload);
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(payload) {
+<span class="cstat-no" title="statement not covered" >    this._verifyPayload(payload);</span>
 &nbsp;
-    const { username, password, fullname } = payload;
+    const { username, password, fullname } = <span class="cstat-no" title="statement not covered" >payload;</span>
 &nbsp;
-    this.username = username;
-    this.password = password;
-    this.fullname = fullname;
+<span class="cstat-no" title="statement not covered" >    this.username = username;</span>
+<span class="cstat-no" title="statement not covered" >    this.password = password;</span>
+<span class="cstat-no" title="statement not covered" >    this.fullname = fullname;</span>
   }
 &nbsp;
-  _verifyPayload({ username, password, fullname }) {
-    if (!username || !password || !fullname) {
-      throw new Error('REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY');
+<span class="fstat-no" title="function not covered" >  _v</span>erifyPayload({ username, password, fullname }) {
+<span class="cstat-no" title="statement not covered" >    if (!username || !password || !fullname) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY');</span>
     }
 &nbsp;
-    if (typeof username !== 'string' || typeof password !== 'string' || typeof fullname !== 'string') {
-      throw new Error('REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION');
+<span class="cstat-no" title="statement not covered" >    if (typeof username !== 'string' || typeof password !== 'string' || typeof fullname !== 'string') {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION');</span>
     }
 &nbsp;
-    if (username.length &gt; 50) {
-      throw new Error('REGISTER_USER.USERNAME_LIMIT_CHAR');
+<span class="cstat-no" title="statement not covered" >    if (username.length &gt; 50) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('REGISTER_USER.USERNAME_LIMIT_CHAR');</span>
     }
 &nbsp;
-    if (!username.match(/^[\w]+$/)) {
-      throw new Error('REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER');
+<span class="cstat-no" title="statement not covered" >    if (!username.match(/^[\w]+$/)) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER');</span>
     }
   }
 }
@@ -163,7 +163,7 @@ module.exports = RegisterUser;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-19T18:38:36.266Z
+                at 2023-11-20T06:54:02.398Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

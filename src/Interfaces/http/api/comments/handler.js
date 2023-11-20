@@ -29,9 +29,9 @@ class CommentsHandler {
 
   async deleteCommentHandler(request) {
     const useCasePayload = {
-      commentId: request.params.commentId,
-      threadId: request.params.threadId,
       owner: request.auth.credentials.id,
+      threadId: request.params.threadId,
+      commentId: request.params.commentId,
     };
     const deleteCommentUseCase = this._container.getInstance(DeleteCommentUseCase.name);
     await deleteCommentUseCase.execute(useCasePayload);

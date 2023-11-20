@@ -5,14 +5,14 @@ const CommentRepliesTableTestHelper = {
     id = 'reply-123',
     content = 'sebuah balasan',
     date = new Date('10-05-2000'),
-    userId = 'user-123',
+    owner = 'user-123',
     threadId = 'thread-123',
     commentId = 'comment-123',
     isDeleted = false,
   }) {
     const query = {
       text: 'INSERT INTO comment_replies VALUES($1, $2, $3, $4, $5, $6, $7)',
-      values: [id, content, date, userId, threadId, commentId, isDeleted],
+      values: [id, content, date, owner, threadId, commentId, isDeleted],
     };
 
     await pool.query(query);
