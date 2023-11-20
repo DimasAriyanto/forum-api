@@ -5,7 +5,7 @@ const CommentsTableTestHelper = {
   async addComment({
     id = 'comment-123',
     content = 'sebuah comment',
-    date = new Date(),
+    date = new Date('10-05-2000'),
     userId = 'user-123',
     threadId = 'thread-123',
     isDeleted = false,
@@ -20,7 +20,7 @@ const CommentsTableTestHelper = {
 
   async findCommentById(id) {
     const query = {
-      text: 'SELECT id, content, user_id as owner FROM comments WHERE id = $1',
+      text: 'SELECT * FROM comments WHERE id = $1',
       values: [id],
     };
 

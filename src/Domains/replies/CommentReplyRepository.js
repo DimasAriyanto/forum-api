@@ -1,17 +1,17 @@
 class CommentReplyRepository {
-  async addNewCommentReply(threadId, commentId, userId, commentReply) {
+  async create(reply) {
     throw new Error('COMMENT_REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async deleteCommentReply(replyId) {
+  async getByThreadId(id) {
     throw new Error('COMMENT_REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async getCommentReplyById(id) {
+  async validate(id) {
     throw new Error('COMMENT_REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async verifyAvailableReply(id) {
+  async delete(id) {
     throw new Error('COMMENT_REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 }

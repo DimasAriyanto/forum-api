@@ -50,13 +50,13 @@ describe('GetDetailThreadUseCase', () => {
     const mockCommentRepository = new CommentRepository();
     const mockCommentReplyRepository = new CommentReplyRepository();
 
-    mockThreadRepository.getThreadById = jest
+    mockThreadRepository.getById = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockThread));
-    mockCommentRepository.getCommentById = jest
+    mockCommentRepository.getByThreadId = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockComment));
-    mockCommentReplyRepository.getCommentReplyById = jest
+    mockCommentReplyRepository.getByThreadId = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockReply));
 
@@ -72,8 +72,8 @@ describe('GetDetailThreadUseCase', () => {
       ...mockThread,
       comments: commentReplies,
     });
-    expect(mockThreadRepository.getThreadById).toBeCalledWith(useCasePayload.threadId);
-    expect(mockCommentRepository.getCommentById).toBeCalledWith(useCasePayload.threadId);
-    expect(mockCommentReplyRepository.getCommentReplyById).toBeCalledWith(useCasePayload.threadId);
+    expect(mockThreadRepository.getById).toBeCalledWith(useCasePayload.threadId);
+    expect(mockCommentRepository.getByThreadId).toBeCalledWith(useCasePayload.threadId);
+    expect(mockCommentReplyRepository.getByThreadId).toBeCalledWith(useCasePayload.threadId);
   });
 });

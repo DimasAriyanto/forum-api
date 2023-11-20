@@ -2,24 +2,15 @@ const CommentRepository = require('../../../../Domains/comments/CommentRepositor
 const CommentReplyRepository = require('../../../../Domains/replies/CommentReplyRepository');
 const ThreadRepository = require('../../../../Domains/threads/ThreadRepository');
 const UserRepository = require('../../../../Domains/users/UserRepository');
-const DeleteCommentReplyUseCase = require('../DeleteCommentReplyUseCase');
+const DeleteReplyUseCase = require('../DeleteReplyUseCase');
 
-describe('DeleteCommentReplyUseCase', () => {
+describe('deleteReplyUseCase', () => {
   it('should orchestrating the delete comment action correctly', async () => {
     const useCasePayload = {
+      replyId: 'reply-123',
+      owner: 'user-123',
+      threadId: 'thread-123',
       commentId: 'comment-123',
-    };
-
-    const useCaseCredential = {
-      id: 'user-123',
-    };
-
-    const mockThread = {
-      id: 'thread-123',
-    };
-
-    const mockComment = {
-      id: 'comment-123',
     };
 
     const mockUserRepository = new UserRepository();
@@ -28,30 +19,32 @@ describe('DeleteCommentReplyUseCase', () => {
     const mockCommentReplyRepository = new CommentReplyRepository();
 
     mockUserRepository.verifyAvailableUser = jest.fn().mockImplementation(() => Promise.resolve());
-    mockThreadRepository.verifyAvailableThread = jest
+    mockThreadRepository.validate = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
-    mockCommentRepository.verifyAvailableComment = jest
+    mockCommentRepository.validate = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
-    mockCommentReplyRepository.verifyAvailableReply = jest
+    mockCommentReplyRepository.validate = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
-    mockCommentReplyRepository.deleteCommentReply = jest
+    mockCommentReplyRepository.deleteReply = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
 
-    const deleteCommentReplyUseCase = new DeleteCommentReplyUseCase({
+    const deleteReplyUseCase = new DeleteReplyUseCase({
       userRepository: mockUserRepository,
       threadRepository: mockThreadRepository,
       commentRepository: mockCommentRepository,
       commentReplyRepository: mockCommentReplyRepository,
     });
 
-    await deleteCommentReplyUseCase.execute(useCasePayload);
+    await deleteReplyUseCase.execute(useCasePayload);
 
-    // expect(mockUserRepository.verifyAvailableUser).toBeCalledWith(useCaseCredential.id);
-    // expect(mockThreadRepository.verifyAvailableThread).toBeCalledWith(mockThread.id);
-    // expect(mockCommentRepository.deleteComment).toBeCalledWith(useCasePayload.commentId);
+    expect(mockUserRepository.verifyAvailableUser).toBeCalledWith(useCasePayload.owner);
+    expect(mockThreadRepository.validate).toBeCalledWith(useCasePayload.threadId);
+    expect(mockCommentRepository.validate).toBeCalledWith(useCasePayload.commentId);
+    expect(mockCommentReplyRepository.validate).toBeCalledWith(useCasePayload.replyId);
+    expect(mockCommentReplyRepository.deleteReply).toBeCalledWith(useCasePayload.replyId);
   });
 });

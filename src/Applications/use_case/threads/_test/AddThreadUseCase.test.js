@@ -9,23 +9,20 @@ describe('AddThreadUseCase', () => {
     const useCasePayload = {
       title: 'sebuah thread',
       body: 'sebuah body thread',
-    };
-
-    const useCaseCredential = {
-      id: 'user-123',
+      owner: 'user-123',
     };
 
     const mockNewThread = new NewThread({
       id: 'thread-123',
       title: useCasePayload.title,
-      owner: useCaseCredential.id,
+      owner: useCasePayload.owner,
     });
 
     const mockUserRepository = new UserRepository();
     const mockThreadRepository = new ThreadRepository();
 
     mockUserRepository.verifyAvailableUser = jest.fn().mockImplementation(() => Promise.resolve());
-    mockThreadRepository.addNewThread = jest
+    mockThreadRepository.create = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockNewThread));
 
@@ -34,22 +31,17 @@ describe('AddThreadUseCase', () => {
       threadRepository: mockThreadRepository,
     });
 
-    const newThread = await getThreadUseCase.execute(useCaseCredential, useCasePayload);
+    const newThread = await getThreadUseCase.execute(useCasePayload);
 
-    expect(newThread).toStrictEqual(
-      new NewThread({
-        id: 'thread-123',
-        owner: useCaseCredential.id,
-        title: useCasePayload.title,
+    expect(newThread).toStrictEqual(mockNewThread);
+
+    expect(mockUserRepository.verifyAvailableUser).toBeCalledWith(useCasePayload.owner);
+    expect(mockThreadRepository.create).toBeCalledWith(
+      new AddedThread({
+        title: 'sebuah thread',
+        body: 'sebuah body thread',
+        owner: 'user-123',
       }),
     );
-
-    // expect(mockUserRepository.verifyAvailableUser).toBeCalledWith(useCaseCredential.id);
-    // expect(mockThreadRepository.addNewThread).toBeCalledWith(
-    //   new AddedThread({
-    //     title: 'sebuah thread',
-    //     body: 'sebuah body thread',
-    //   })
-    // );
   });
 });

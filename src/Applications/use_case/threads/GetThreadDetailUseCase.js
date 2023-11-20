@@ -9,9 +9,9 @@ class GetDetailThreadUseCase {
   }
 
   async execute(threadId) {
-    const thread = await this._threadRepository.getThreadById(threadId);
-    let comments = await this._commentRepository.getCommentById(threadId);
-    const replies = await this._commentReplyRepository.getCommentReplyById(threadId);
+    const thread = await this._threadRepository.getById(threadId);
+    let comments = await this._commentRepository.getByThreadId(threadId);
+    const replies = await this._commentReplyRepository.getByThreadId(threadId);
 
     comments = comments.map((comment) => ({
       id: comment.id,

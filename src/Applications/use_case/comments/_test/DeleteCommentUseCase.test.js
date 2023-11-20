@@ -7,14 +7,8 @@ describe('DeleteCommentUseCase', () => {
   it('should orchestrating the delete comment action correctly', async () => {
     const useCasePayload = {
       commentId: 'comment-123',
-    };
-
-    const useCaseCredential = {
-      id: 'user-123',
-    };
-
-    const mockThread = {
-      id: 'thread-123',
+      threadId: 'thread-123',
+      owner: 'user-123',
     };
 
     const mockUserRepository = new UserRepository();
@@ -22,13 +16,13 @@ describe('DeleteCommentUseCase', () => {
     const mockCommentRepository = new CommentRepository();
 
     mockUserRepository.verifyAvailableUser = jest.fn().mockImplementation(() => Promise.resolve());
-    mockThreadRepository.verifyAvailableThread = jest
+    mockThreadRepository.validate = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
-    mockCommentRepository.verifyAvailableComment = jest
+    mockCommentRepository.validate = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
-    mockCommentRepository.deleteComment = jest.fn().mockImplementation(() => Promise.resolve());
+    mockCommentRepository.delete = jest.fn().mockImplementation(() => Promise.resolve());
 
     const deleteCommentUseCase = new DeleteCommentUseCase({
       userRepository: mockUserRepository,
@@ -38,8 +32,9 @@ describe('DeleteCommentUseCase', () => {
 
     await deleteCommentUseCase.execute(useCasePayload);
 
-    // expect(mockUserRepository.verifyAvailableUser).toBeCalledWith(useCaseCredential.id);
-    // expect(mockThreadRepository.verifyAvailableThread).toBeCalledWith(mockThread.id);
-    // expect(mockCommentRepository.deleteComment).toBeCalledWith(useCasePayload.commentId);
+    expect(mockUserRepository.verifyAvailableUser).toBeCalledWith(useCasePayload.owner);
+    expect(mockThreadRepository.validate).toBeCalledWith(useCasePayload.threadId);
+    expect(mockCommentRepository.validate).toBeCalledWith(useCasePayload.commentId);
+    expect(mockCommentRepository.delete).toBeCalledWith(useCasePayload.commentId);
   });
 });

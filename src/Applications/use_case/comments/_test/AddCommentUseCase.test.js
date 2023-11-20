@@ -9,20 +9,14 @@ describe('AddCommentUseCase', () => {
   it('should orchestrating the add comment action correctly', async () => {
     const useCasePayload = {
       content: 'sebuah comment',
-    };
-
-    const useCaseCredential = {
-      id: 'user-123',
-    };
-
-    const useCaseThread = {
-      id: 'thread-123',
+      threadId: 'thread-123',
+      owner: 'user-123',
     };
 
     const mockNewComment = new NewComment({
       id: 'comment-123',
       content: useCasePayload.content,
-      owner: useCaseThread.id,
+      owner: useCasePayload.owner,
     });
 
     const mockUserRepository = new UserRepository();
@@ -30,10 +24,10 @@ describe('AddCommentUseCase', () => {
     const mockCommentRepository = new CommentRepository();
 
     mockUserRepository.verifyAvailableUser = jest.fn().mockImplementation(() => Promise.resolve());
-    mockThreadRepository.verifyAvailableThread = jest
+    mockThreadRepository.validate = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
-    mockCommentRepository.addNewComment = jest
+    mockCommentRepository.create = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockNewComment));
 
@@ -43,26 +37,24 @@ describe('AddCommentUseCase', () => {
       commentRepository: mockCommentRepository,
     });
 
-    const newComment = await getCommentUseCase.execute(
-      useCaseThread,
-      useCaseCredential,
-      useCasePayload,
-    );
+    const newComment = await getCommentUseCase.execute(useCasePayload);
 
     expect(newComment).toStrictEqual(
       new NewComment({
         id: 'comment-123',
         content: useCasePayload.content,
-        owner: useCaseThread.id,
+        owner: useCasePayload.owner,
       }),
     );
 
-    // expect(mockUserRepository.verifyAvailableUser).toBeCalledWith(useCaseCredential.id);
-    // expect(mockThreadRepository.verifyAvailableThread).toBeCalledWith(useCaseThread.id);
-    // expect(mockCommentRepository.addNewComment).toBeCalledWith(
-    //   new AddedComment({
-    //     content: 'sebuah comment',
-    //   }),
-    // );
+    expect(mockUserRepository.verifyAvailableUser).toBeCalledWith(useCasePayload.owner);
+    expect(mockThreadRepository.validate).toBeCalledWith(useCasePayload.threadId);
+    expect(mockCommentRepository.create).toBeCalledWith(
+      new AddedComment({
+        content: 'sebuah comment',
+        threadId: 'thread-123',
+        owner: 'user-123',
+      }),
+    );
   });
 });

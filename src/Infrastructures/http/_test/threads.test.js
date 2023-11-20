@@ -153,6 +153,8 @@ describe('/threads endpoint', () => {
 
       const responseAuthJson = JSON.parse(responseAuth.payload);
 
+      console.log('test1 : ', responseAuthJson);
+
       // action
       const responseThread = await server.inject({
         method: 'POST',

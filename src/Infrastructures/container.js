@@ -32,7 +32,7 @@ const CommentReplyRepository = require('../Domains/replies/CommentReplyRepositor
 const CommentReplyRepositoryPostgres = require('./repository/CommentReplyRepositoryPostgres');
 const DeleteCommentUseCase = require('../Applications/use_case/comments/DeleteCommentUseCase');
 const AddCommentReplyUseCase = require('../Applications/use_case/replies/AddCommentReplyUseCase');
-const DeleteCommentReplyUseCase = require('../Applications/use_case/replies/DeleteCommentReplyUseCase');
+const DeleteCommentReplyUseCase = require('../Applications/use_case/replies/DeleteReplyUseCase');
 
 // creating container
 const container = createContainer();

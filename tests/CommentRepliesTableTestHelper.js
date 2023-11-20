@@ -4,7 +4,7 @@ const CommentRepliesTableTestHelper = {
   async addCommentReply({
     id = 'reply-123',
     content = 'sebuah balasan',
-    date = new Date(),
+    date = new Date('10-05-2000'),
     userId = 'user-123',
     threadId = 'thread-123',
     commentId = 'comment-123',
@@ -20,7 +20,7 @@ const CommentRepliesTableTestHelper = {
 
   async findCommentReplyById(id) {
     const query = {
-      text: 'SELECT id, content, user_id as owner FROM comment_replies WHERE id = $1',
+      text: 'SELECT * FROM comment_replies WHERE id = $1',
       values: [id],
     };
 

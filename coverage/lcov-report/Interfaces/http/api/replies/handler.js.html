@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/18</span>
+                <span class='fraction'>6/16</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/18</span>
+                <span class='fraction'>6/16</span>
             </div>
         
             
@@ -108,7 +108,9 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -120,16 +122,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -138,12 +130,24 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -164,15 +168,14 @@ class CommentRepliesHandler {
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  as</span>ync postCommentReplyHandler(request, h) {
+    const useCasePayload = <span class="cstat-no" title="statement not covered" >{</span>
+      content: request.payload.content,
+      owner: request.auth.credentials.id,
+      commentId: request.params.commentId,
+      threadId: request.params.threadId,
+    };
     const addCommentReplyUseCase = <span class="cstat-no" title="statement not covered" >this._container.getInstance(AddCommentReplyUseCase.name);</span>
-    const { id: userId } = <span class="cstat-no" title="statement not covered" >request.auth.credentials;</span>
-    const { threadId, commentId } = <span class="cstat-no" title="statement not covered" >request.params;</span>
-    const addedReply = <span class="cstat-no" title="statement not covered" >await addCommentReplyUseCase.execute(</span>
-      threadId,
-      commentId,
-      userId,
-      request.payload,
-    );
+    const addedReply = <span class="cstat-no" title="statement not covered" >await addCommentReplyUseCase.execute(useCasePayload);</span>
 &nbsp;
     const response = <span class="cstat-no" title="statement not covered" >h.response({</span>
       status: 'success',
@@ -185,11 +188,14 @@ class CommentRepliesHandler {
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  as</span>ync deleteCommentReplyHandler(request) {
+    const useCasePayload = <span class="cstat-no" title="statement not covered" >{</span>
+      owner: request.auth.credentials.id,
+      threadId: request.params.threadId,
+      commentId: request.params.commentId,
+      replyId: request.params.replyId,
+    };
     const deleteCommentReplyUseCase = <span class="cstat-no" title="statement not covered" >this._container.getInstance(DeleteCommentReplyUseCase.name);</span>
-    const { id: userId } = <span class="cstat-no" title="statement not covered" >request.auth.credentials;</span>
-    const { threadId, commentId, replyId } = <span class="cstat-no" title="statement not covered" >request.params;</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    await deleteCommentReplyUseCase.execute(userId, threadId, commentId, replyId);</span>
+<span class="cstat-no" title="statement not covered" >    await deleteCommentReplyUseCase.execute(useCasePayload);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return {</span>
       status: 'success',
@@ -205,7 +211,7 @@ module.exports = CommentRepliesHandler;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-19T03:18:22.148Z
+                at 2023-11-19T18:38:36.266Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -1,7 +1,6 @@
 const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const CommentRepository = require('../../Domains/comments/CommentRepository');
-const CommentDetail = require('../../Domains/comments/entities/CommentDetail');
 const NewComment = require('../../Domains/comments/entities/NewComment');
 
 class CommentRepositoryPostgres extends CommentRepository {
@@ -11,15 +10,15 @@ class CommentRepositoryPostgres extends CommentRepository {
     this._idGenerator = idGenerator;
   }
 
-  async addNewComment(threadId, userId, comment) {
-    const { content } = comment;
+  async create(comment) {
+    const { content, owner, threadId } = comment;
     const id = `comment-${this._idGenerator()}`;
     const date = new Date();
     const isDeleted = false;
 
     const query = {
       text: 'INSERT INTO comments VALUES($1, $2, $3, $4, $5, $6) returning id, content, user_id',
-      values: [id, content, date, userId, threadId, isDeleted],
+      values: [id, content, date, owner, threadId, isDeleted],
     };
 
     const result = await this._pool.query(query);
@@ -31,9 +30,9 @@ class CommentRepositoryPostgres extends CommentRepository {
     });
   }
 
-  async getCommentById(threadId) {
+  async getByThreadId(threadId) {
     const query = {
-      text: `SELECT comments.id, comments.content, comments.date, users.username
+      text: `SELECT comments.id, comments.content, comments.date, comments.is_deleted, users.username
              FROM comments
              INNER JOIN users
              ON comments.user_id = users.id
@@ -42,16 +41,19 @@ class CommentRepositoryPostgres extends CommentRepository {
       values: [threadId],
     };
 
-    const { rows } = await this._pool.query(query);
+    const { rows, rowCount } = await this._pool.query(query);
 
-    // return new CommentDetail({ ...rows });
+    if (!rowCount) {
+      throw new NotFoundError('Comment not found');
+    }
+
     return rows;
   }
 
-  async verifyAvailableComment(commentId) {
+  async validate(id) {
     const query = {
       text: 'SELECT id FROM comments WHERE id = $1',
-      values: [commentId],
+      values: [id],
     };
 
     const result = await this._pool.query(query);
@@ -63,21 +65,19 @@ class CommentRepositoryPostgres extends CommentRepository {
     return result.rows[0].id;
   }
 
-  async deleteComment(commentId) {
-    const deletedContent = '**komentar telah dihapus**';
-
+  async delete(id) {
     const query = {
-      text: 'UPDATE comments SET content = $1, is_deleted = true WHERE id = $2 RETURNING id',
-      values: [deletedContent, commentId],
+      text: 'UPDATE comments SET is_deleted = true WHERE id = $1 RETURNING id',
+      values: [id],
     };
 
-    const result = await this._pool.query(query);
+    const { rowCount } = await this._pool.query(query);
 
-    if (!result.rowCount) {
+    if (!rowCount) {
       throw new AuthorizationError('gagal menghapus content');
     }
 
-    return result.rowCount;
+    return rowCount;
   }
 }
 

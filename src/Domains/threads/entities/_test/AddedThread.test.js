@@ -13,6 +13,7 @@ describe('a AddedThread entities', () => {
     const payload = {
       title: 123,
       body: 'sebuah body thread',
+      owner: 'user-123',
     };
 
     expect(() => new AddedThread(payload)).toThrowError('ADDED_THREAD.PROPORTY_NOT_MEET_DATA_TYPE_NEEDED');
@@ -22,11 +23,13 @@ describe('a AddedThread entities', () => {
     const payload = {
       title: 'sebuah thread',
       body: 'sebuah body thread',
+      owner: 'user-123',
     };
 
     const addedThread = new AddedThread(payload);
 
     expect(addedThread.title).toEqual(payload.title);
     expect(addedThread.body).toEqual(payload.body);
+    expect(addedThread.owner).toEqual(payload.owner);
   });
 });
