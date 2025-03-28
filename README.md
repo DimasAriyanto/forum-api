@@ -11,7 +11,7 @@ Proyek ini adalah aplikasi RESTful API untuk platform forum diskusi. API ini men
 - Pengujian otomatis dengan Jest
 
 ## Teknologi yang Digunakan
-- **Node.js** + **Express.js**
+- **Node.js** + **Hapi.js**
 - **PostgreSQL** (Database)
 - **Joi** (Validasi)
 - **Jest** (Testing)
